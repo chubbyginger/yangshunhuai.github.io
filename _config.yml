@@ -3,17 +3,17 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
-subtitle: ''
-description: ''
+title: yangshunhuai的博客
+subtitle: '随手写点什么'
+description: 'null'
 keywords:
-author: John Doe
-language: en
+author: yangshunhuai
+language: zh-cn
 timezone: ''
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://example.com
+url: 'https://yangshunhuai.github.io'
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -41,9 +41,6 @@ external_link:
 filename_case: 0
 render_drafts: false
 post_asset_folder: true
-marked:
-  prependRoot: true
-  postAsset: true
 relative_link: false
 future: true
 highlight:
@@ -108,3 +105,7 @@ deploy:
   type: git
   repo: git@github.com:yangshunhuai/yangshunhuai.github.io.git
   branch: gh-pages 
+  
+marked:
+  prependRoot: true
+  postAsset: true
