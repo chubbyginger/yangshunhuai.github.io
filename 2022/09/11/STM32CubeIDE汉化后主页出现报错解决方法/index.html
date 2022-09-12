@@ -4,17 +4,26 @@
   <meta charset="utf-8">
   
   
-  <title>yangshunhuai的博客</title>
+  <title>STM32CubeIDE汉化后主页出现报错解决方法 | yangshunhuai的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="null">
-<meta property="og:type" content="website">
-<meta property="og:title" content="yangshunhuai的博客">
-<meta property="og:url" content="https://yangshunhuai.github.io/index.html">
+  <meta name="description" content="STM32CubeIDE是基于eclipse二次开发的IDE，汉化步骤基本与eclipse相同，但是如果直接照搬会导致主页出现故障无法打开，可能会出现class org.eclipse.ui.internal.ViewIntroAdapterPart cannot be cast to class org.eclipse.ui.IViewPart的故障。 解决方法是，如果主页出故障了，就把STM3">
+<meta property="og:type" content="article">
+<meta property="og:title" content="STM32CubeIDE汉化后主页出现报错解决方法">
+<meta property="og:url" content="https://yangshunhuai.github.io/2022/09/11/STM32CubeIDE%E6%B1%89%E5%8C%96%E5%90%8E%E4%B8%BB%E9%A1%B5%E5%87%BA%E7%8E%B0%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/index.html">
 <meta property="og:site_name" content="yangshunhuai的博客">
-<meta property="og:description" content="null">
+<meta property="og:description" content="STM32CubeIDE是基于eclipse二次开发的IDE，汉化步骤基本与eclipse相同，但是如果直接照搬会导致主页出现故障无法打开，可能会出现class org.eclipse.ui.internal.ViewIntroAdapterPart cannot be cast to class org.eclipse.ui.IViewPart的故障。 解决方法是，如果主页出故障了，就把STM3">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://yangshunhuai.github.io/2022/09/11/STM32CubeIDE%E6%B1%89%E5%8C%96%E5%90%8E%E4%B8%BB%E9%A1%B5%E5%87%BA%E7%8E%B0%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/%E5%AE%89%E8%A3%85%E6%96%B0%E8%BD%AF%E4%BB%B6.png">
+<meta property="og:image" content="https://yangshunhuai.github.io/2022/09/11/STM32CubeIDE%E6%B1%89%E5%8C%96%E5%90%8E%E4%B8%BB%E9%A1%B5%E5%87%BA%E7%8E%B0%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/%E6%B7%BB%E5%8A%A0%E8%BD%AF%E4%BB%B6%E6%BA%90.png">
+<meta property="og:image" content="https://yangshunhuai.github.io/2022/09/11/STM32CubeIDE%E6%B1%89%E5%8C%96%E5%90%8E%E4%B8%BB%E9%A1%B5%E5%87%BA%E7%8E%B0%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/%E5%A1%AB%E5%86%99%E5%9C%B0%E5%9D%80.png">
+<meta property="og:image" content="https://yangshunhuai.github.io/2022/09/11/STM32CubeIDE%E6%B1%89%E5%8C%96%E5%90%8E%E4%B8%BB%E9%A1%B5%E5%87%BA%E7%8E%B0%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/eclipse.png">
+<meta property="og:image" content="https://yangshunhuai.github.io/2022/09/11/STM32CubeIDE%E6%B1%89%E5%8C%96%E5%90%8E%E4%B8%BB%E9%A1%B5%E5%87%BA%E7%8E%B0%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/cdt.png">
+<meta property="og:image" content="https://yangshunhuai.github.io/2022/09/11/STM32CubeIDE%E6%B1%89%E5%8C%96%E5%90%8E%E4%B8%BB%E9%A1%B5%E5%87%BA%E7%8E%B0%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/%E6%B1%89%E5%8C%96%E5%90%8E.png">
+<meta property="article:published_time" content="2022-09-11T14:54:15.000Z">
+<meta property="article:modified_time" content="2022-09-11T14:55:36.499Z">
 <meta property="article:author" content="yangshunhuai">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yangshunhuai.github.io/2022/09/11/STM32CubeIDE%E6%B1%89%E5%8C%96%E5%90%8E%E4%B8%BB%E9%A1%B5%E5%87%BA%E7%8E%B0%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/%E5%AE%89%E8%A3%85%E6%96%B0%E8%BD%AF%E4%BB%B6.png">
   
     <link rel="alternate" href="/atom.xml" title="yangshunhuai的博客" type="application/atom+xml">
   
@@ -75,9 +84,7 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-STM32CubeIDE汉化后主页出现报错解决方法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-STM32CubeIDE汉化后主页出现报错解决方法" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2022/09/11/STM32CubeIDE%E6%B1%89%E5%8C%96%E5%90%8E%E4%B8%BB%E9%A1%B5%E5%87%BA%E7%8E%B0%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" class="article-date">
   <time class="dt-published" datetime="2022-09-11T14:54:15.000Z" itemprop="datePublished">2022-09-11</time>
@@ -90,8 +97,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/09/11/STM32CubeIDE%E6%B1%89%E5%8C%96%E5%90%8E%E4%B8%BB%E9%A1%B5%E5%87%BA%E7%8E%B0%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">STM32CubeIDE汉化后主页出现报错解决方法</a>
+    <h1 class="p-name article-title" itemprop="headline name">
+      STM32CubeIDE汉化后主页出现报错解决方法
     </h1>
   
 
@@ -122,101 +129,19 @@
     </footer>
   </div>
   
-</article>
-
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-helloworld" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/09/03/helloworld/" class="article-date">
-  <time class="dt-published" datetime="2022-09-03T09:05:04.000Z" itemprop="datePublished">2022-09-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/09/03/helloworld/">helloworld</a>
-    </h1>
+    <a href="/2022/09/03/helloworld/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Älter</strong>
+      <div class="article-nav-title">helloworld</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>第一个文章测试<br><img src="/2022/09/03/helloworld/%E4%BA%91%E9%87%8C%E9%9B%BE%E9%87%8C.jpg"></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://yangshunhuai.github.io/2022/09/03/helloworld/" data-id="cl7y7axon0000gc5fdm5aehzc" data-title="helloworld" class="article-share-link">Teilen</a>
-      
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-
-  
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2022/09/03/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2022-09-03T05:04:03.614Z" itemprop="datePublished">2022-09-03</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/09/03/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://yangshunhuai.github.io/2022/09/03/hello-world/" data-id="cl7y7axov0002gc5fgu9d5a45" data-title="Hello World" class="article-share-link">Teilen</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
 </section>
