@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>终于摸清了百度网盘所谓优化速率的门道 | yangshunhuai的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="百度网盘的下载速度，有目共睹：在5G时代，百度网盘的下载速度仍然以kB&#x2F;s甚至B&#x2F;s为单位。 然后因为网上对百度网盘骂声连连，百度网盘不得不推出了一个所谓的“优化速率”功能： 这个所谓的优化速率，指的就是利用你电脑的带宽，给别人加速，同时给自己加速。乍一听好像还不错，但是百度坏得很，哪会这么容易让你占到便宜，不然人家VIP不就卖不出去了。   这个所谓“优化速率”，只有人看着的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="终于摸清了百度网盘所谓优化速率的门道">
+<meta property="og:url" content="https://yangshunhuai.github.io/2022/09/12/%E7%BB%88%E4%BA%8E%E6%91%B8%E6%B8%85%E4%BA%86%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E6%89%80%E8%B0%93%E4%BC%98%E5%8C%96%E9%80%9F%E7%8E%87%E7%9A%84%E9%97%A8%E9%81%93/index.html">
+<meta property="og:site_name" content="yangshunhuai的博客">
+<meta property="og:description" content="百度网盘的下载速度，有目共睹：在5G时代，百度网盘的下载速度仍然以kB&#x2F;s甚至B&#x2F;s为单位。 然后因为网上对百度网盘骂声连连，百度网盘不得不推出了一个所谓的“优化速率”功能： 这个所谓的优化速率，指的就是利用你电脑的带宽，给别人加速，同时给自己加速。乍一听好像还不错，但是百度坏得很，哪会这么容易让你占到便宜，不然人家VIP不就卖不出去了。   这个所谓“优化速率”，只有人看着的">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://yangshunhuai.github.io/2022/09/12/%E7%BB%88%E4%BA%8E%E6%91%B8%E6%B8%85%E4%BA%86%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E6%89%80%E8%B0%93%E4%BC%98%E5%8C%96%E9%80%9F%E7%8E%87%E7%9A%84%E9%97%A8%E9%81%93/%E4%BC%98%E5%8C%96%E9%80%9F%E7%8E%87.png">
+<meta property="og:image" content="https://yangshunhuai.github.io/2022/09/12/%E7%BB%88%E4%BA%8E%E6%91%B8%E6%B8%85%E4%BA%86%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E6%89%80%E8%B0%93%E4%BC%98%E5%8C%96%E9%80%9F%E7%8E%87%E7%9A%84%E9%97%A8%E9%81%93/%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%985.1mb.png">
+<meta property="article:published_time" content="2022-09-12T03:25:19.000Z">
+<meta property="article:modified_time" content="2022-09-12T03:53:18.990Z">
+<meta property="article:author" content="yangshunhuai">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yangshunhuai.github.io/2022/09/12/%E7%BB%88%E4%BA%8E%E6%91%B8%E6%B8%85%E4%BA%86%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E6%89%80%E8%B0%93%E4%BC%98%E5%8C%96%E9%80%9F%E7%8E%87%E7%9A%84%E9%97%A8%E9%81%93/%E4%BC%98%E5%8C%96%E9%80%9F%E7%8E%87.png">
+  
+    <link rel="alternate" href="/atom.xml" title="yangshunhuai的博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">yangshunhuai的博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">随手写点什么</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://yangshunhuai.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-终于摸清了百度网盘所谓优化速率的门道" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/09/12/%E7%BB%88%E4%BA%8E%E6%91%B8%E6%B8%85%E4%BA%86%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E6%89%80%E8%B0%93%E4%BC%98%E5%8C%96%E9%80%9F%E7%8E%87%E7%9A%84%E9%97%A8%E9%81%93/" class="article-date">
+  <time class="dt-published" datetime="2022-09-12T03:25:19.000Z" itemprop="datePublished">2022-09-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      终于摸清了百度网盘所谓优化速率的门道
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>百度网盘的下载速度，有目共睹：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1f4411M7QC?t=173.5">在5G时代，百度网盘的下载速度仍然以kB&#x2F;s甚至B&#x2F;s为单位。</a></p>
+<p>然后因为网上对百度网盘骂声连连，百度网盘不得不推出了一个所谓的“优化速率”功能：<br><img src="/2022/09/12/%E7%BB%88%E4%BA%8E%E6%91%B8%E6%B8%85%E4%BA%86%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E6%89%80%E8%B0%93%E4%BC%98%E5%8C%96%E9%80%9F%E7%8E%87%E7%9A%84%E9%97%A8%E9%81%93/%E4%BC%98%E5%8C%96%E9%80%9F%E7%8E%87.png"></p>
+<p>这个所谓的优化速率，指的就是利用你电脑的带宽，给别人加速，同时给自己加速。乍一听好像还不错，但是百度坏得很，哪会这么容易让你占到便宜，不然人家VIP不就卖不出去了。</p>
+<blockquote>
+<ol>
+<li>这个所谓“优化速率”，只有人看着的时候速度才快。所谓“看着”，就是屏幕开着，然后聚焦在百度网盘的窗口上。</li>
+<li>只要加速超过了5分钟左右，速度就掉下去了。</li>
+</ol>
+</blockquote>
+<p>针对这些点，可以总结出利用百度网盘加速下载的操作，2022&#x2F;7&#x2F;7亲测有效：</p>
+<ol>
+<li>开着屏幕，聚焦在百度网盘的窗口上。<strong>这时候大概率是不能干别的事情的，所以最好弄一个虚拟机，或者弄一个备用机下载。</strong></li>
+<li>每隔一会，把下载暂停再继续一下。可以比如说<code>autohotkey</code>之类的写个脚本每隔五分钟操作一下即可。</li>
+</ol>
+<p>实际测试效果如下：<br><img src="/2022/09/12/%E7%BB%88%E4%BA%8E%E6%91%B8%E6%B8%85%E4%BA%86%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E6%89%80%E8%B0%93%E4%BC%98%E5%8C%96%E9%80%9F%E7%8E%87%E7%9A%84%E9%97%A8%E9%81%93/%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%985.1mb.png"></p>
+<p>2022&#x2F;09&#x2F;12更新：百度网盘的策略改变了，现在似乎不好用了</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://yangshunhuai.github.io/2022/09/12/%E7%BB%88%E4%BA%8E%E6%91%B8%E6%B8%85%E4%BA%86%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E6%89%80%E8%B0%93%E4%BC%98%E5%8C%96%E9%80%9F%E7%8E%87%E7%9A%84%E9%97%A8%E9%81%93/" data-id="cl7y8dh8z0008z05f6b0s1x48" data-title="终于摸清了百度网盘所谓优化速率的门道" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2022/09/11/STM32CubeIDE%E6%B1%89%E5%8C%96%E5%90%8E%E4%B8%BB%E9%A1%B5%E5%87%BA%E7%8E%B0%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">STM32CubeIDE汉化后主页出现报错解决方法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/">嵌入式开发</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/stm32/" rel="tag">stm32</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/stm32/" style="font-size: 10px;">stm32</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/09/12/%E7%BB%88%E4%BA%8E%E6%91%B8%E6%B8%85%E4%BA%86%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E6%89%80%E8%B0%93%E4%BC%98%E5%8C%96%E9%80%9F%E7%8E%87%E7%9A%84%E9%97%A8%E9%81%93/">终于摸清了百度网盘所谓优化速率的门道</a>
+          </li>
+        
+          <li>
+            <a href="/2022/09/11/STM32CubeIDE%E6%B1%89%E5%8C%96%E5%90%8E%E4%B8%BB%E9%A1%B5%E5%87%BA%E7%8E%B0%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">STM32CubeIDE汉化后主页出现报错解决方法</a>
+          </li>
+        
+          <li>
+            <a href="/2022/09/03/helloworld/">helloworld</a>
+          </li>
+        
+          <li>
+            <a href="/2022/09/03/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 yangshunhuai<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
