@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>给硬盘创建raw镜像，并挂载尝试修复 | yangshunhuai的博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="所需资源 Bochs bximage 下载地址   Forensics OSFMount 官网 备用   MSYS2 官网，点击”Download the installer：msys2 xxxxx.exe” 备用密码:ctk5   GNU ddrescue 本人编译版本    正文 硬盘多大，raw镜像就要多大，例如2T的硬盘，镜像也必须是2T大小。但是很多硬盘后半部分是没有数据的，全部是0，可">
+<meta property="og:type" content="article">
+<meta property="og:title" content="给硬盘创建raw镜像，并挂载尝试修复">
+<meta property="og:url" content="https://yangshunhuai.github.io/2023/05/06/%E7%BB%99%E7%A1%AC%E7%9B%98%E5%88%9B%E5%BB%BAraw%E9%95%9C%E5%83%8F%EF%BC%8C%E5%B9%B6%E6%8C%82%E8%BD%BD%E5%B0%9D%E8%AF%95%E4%BF%AE%E5%A4%8D/index.html">
+<meta property="og:site_name" content="yangshunhuai的博客">
+<meta property="og:description" content="所需资源 Bochs bximage 下载地址   Forensics OSFMount 官网 备用   MSYS2 官网，点击”Download the installer：msys2 xxxxx.exe” 备用密码:ctk5   GNU ddrescue 本人编译版本    正文 硬盘多大，raw镜像就要多大，例如2T的硬盘，镜像也必须是2T大小。但是很多硬盘后半部分是没有数据的，全部是0，可">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://yangshunhuai.github.io/2023/05/06/%E7%BB%99%E7%A1%AC%E7%9B%98%E5%88%9B%E5%BB%BAraw%E9%95%9C%E5%83%8F%EF%BC%8C%E5%B9%B6%E6%8C%82%E8%BD%BD%E5%B0%9D%E8%AF%95%E4%BF%AE%E5%A4%8D/%E6%89%93%E5%BC%80bximage.png">
+<meta property="og:image" content="https://yangshunhuai.github.io/2023/05/06/%E7%BB%99%E7%A1%AC%E7%9B%98%E5%88%9B%E5%BB%BAraw%E9%95%9C%E5%83%8F%EF%BC%8C%E5%B9%B6%E6%8C%82%E8%BD%BD%E5%B0%9D%E8%AF%95%E4%BF%AE%E5%A4%8D/bximage%E5%AE%8C%E6%88%90.png">
+<meta property="og:image" content="https://yangshunhuai.github.io/2023/05/06/%E7%BB%99%E7%A1%AC%E7%9B%98%E5%88%9B%E5%BB%BAraw%E9%95%9C%E5%83%8F%EF%BC%8C%E5%B9%B6%E6%8C%82%E8%BD%BD%E5%B0%9D%E8%AF%95%E4%BF%AE%E5%A4%8D/osfmount1.png">
+<meta property="og:image" content="https://yangshunhuai.github.io/2023/05/06/%E7%BB%99%E7%A1%AC%E7%9B%98%E5%88%9B%E5%BB%BAraw%E9%95%9C%E5%83%8F%EF%BC%8C%E5%B9%B6%E6%8C%82%E8%BD%BD%E5%B0%9D%E8%AF%95%E4%BF%AE%E5%A4%8D/osfmount2.png">
+<meta property="og:image" content="https://yangshunhuai.github.io/2023/05/06/%E7%BB%99%E7%A1%AC%E7%9B%98%E5%88%9B%E5%BB%BAraw%E9%95%9C%E5%83%8F%EF%BC%8C%E5%B9%B6%E6%8C%82%E8%BD%BD%E5%B0%9D%E8%AF%95%E4%BF%AE%E5%A4%8D/osfmount4.png">
+<meta property="og:image" content="https://yangshunhuai.github.io/2023/05/06/%E7%BB%99%E7%A1%AC%E7%9B%98%E5%88%9B%E5%BB%BAraw%E9%95%9C%E5%83%8F%EF%BC%8C%E5%B9%B6%E6%8C%82%E8%BD%BD%E5%B0%9D%E8%AF%95%E4%BF%AE%E5%A4%8D/osfmountfinish.png">
+<meta property="article:published_time" content="2023-05-06T09:08:17.000Z">
+<meta property="article:modified_time" content="2023-05-06T09:54:18.302Z">
+<meta property="article:author" content="yangshunhuai">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yangshunhuai.github.io/2023/05/06/%E7%BB%99%E7%A1%AC%E7%9B%98%E5%88%9B%E5%BB%BAraw%E9%95%9C%E5%83%8F%EF%BC%8C%E5%B9%B6%E6%8C%82%E8%BD%BD%E5%B0%9D%E8%AF%95%E4%BF%AE%E5%A4%8D/%E6%89%93%E5%BC%80bximage.png">
+  
+    <link rel="alternate" href="/atom.xml" title="yangshunhuai的博客" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">yangshunhuai的博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">随手写点什么</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://yangshunhuai.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-给硬盘创建raw镜像，并挂载尝试修复" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2023/05/06/%E7%BB%99%E7%A1%AC%E7%9B%98%E5%88%9B%E5%BB%BAraw%E9%95%9C%E5%83%8F%EF%BC%8C%E5%B9%B6%E6%8C%82%E8%BD%BD%E5%B0%9D%E8%AF%95%E4%BF%AE%E5%A4%8D/" class="article-date">
+  <time class="dt-published" datetime="2023-05-06T09:08:17.000Z" itemprop="datePublished">2023-05-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      给硬盘创建raw镜像，并挂载尝试修复
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="所需资源"><a href="#所需资源" class="headerlink" title="所需资源"></a>所需资源</h2><ul>
+<li>Bochs bximage<blockquote>
+<p><a target="_blank" rel="noopener" href="https://wwmf.lanzout.com/i5KiC0uu12uj">下载地址</a></p>
+</blockquote>
+</li>
+<li>Forensics OSFMount<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.osforensics.com/tools/mount-disk-images.html">官网</a></p>
+<p><a target="_blank" rel="noopener" href="https://wwmf.lanzout.com/iGV320uu17rg">备用</a></p>
+</blockquote>
+</li>
+<li>MSYS2<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.msys2.org/">官网</a>，点击”Download the installer：msys2 xxxxx.exe”</p>
+<p><a target="_blank" rel="noopener" href="https://wwmf.lanzout.com/ifIx30uu270f">备用</a>密码:ctk5</p>
+</blockquote>
+</li>
+<li>GNU ddrescue<blockquote>
+<p><a target="_blank" rel="noopener" href="https://wwmf.lanzout.com/iLqA10uu2cvg">本人编译版本</a></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><ol>
+<li><p>硬盘多大，raw镜像就要多大，例如2T的硬盘，镜像也必须是2T大小。但是很多硬盘后半部分是没有数据的，全部是0，可以利用这个特性在不到2T的硬盘上存放2T的镜像。<br>接下来创建这样的镜像：</p>
+<ol>
+<li>用资源管理器打开bximage所在文件夹，在顶部地址栏输入<code>powershell</code>，按下Enter键。<br><img src="/2023/05/06/%E7%BB%99%E7%A1%AC%E7%9B%98%E5%88%9B%E5%BB%BAraw%E9%95%9C%E5%83%8F%EF%BC%8C%E5%B9%B6%E6%8C%82%E8%BD%BD%E5%B0%9D%E8%AF%95%E4%BF%AE%E5%A4%8D/%E6%89%93%E5%BC%80bximage.png"></li>
+<li>在控制台依次键入：<code>1</code>，然后按下Enter</li>
+<li>按下三次Enter键，当询问<code>Enter the hard disk size in megabytes</code>时，输入<code>2097152</code>，该数值对应2T硬盘</li>
+<li>询问<code>What should be the name of the image?</code>时，输入一个方便的地方，如：<code>D:\c.img</code></li>
+<li>完成后如图：<br><img src="/2023/05/06/%E7%BB%99%E7%A1%AC%E7%9B%98%E5%88%9B%E5%BB%BAraw%E9%95%9C%E5%83%8F%EF%BC%8C%E5%B9%B6%E6%8C%82%E8%BD%BD%E5%B0%9D%E8%AF%95%E4%BF%AE%E5%A4%8D/bximage%E5%AE%8C%E6%88%90.png"></li>
+</ol>
+</li>
+<li><p>安装MSYS</p>
+<p>很简单，步骤略，建议网上找个教程</p>
+</li>
+<li><p>制作镜像</p>
+<ol>
+<li>进入MSYS环境。在开始菜单中打开”MSYS2 MSYS”</li>
+<li>出现终端。这个终端字体默认较小，可以右键点击终端，打开<code>Options</code>，点击左边<code>Text</code>栏，然后点击Select按钮，修改字体。</li>
+<li>首先进入放了ddrescue的文件夹。msys2环境使用bash，输入路径时注意用正斜杠（&#x2F;）替换反斜杠(\)。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /d/ddrescue-1.27-install</span><br></pre></td></tr></table></figure></li>
+<li>输入以下命令，查看硬盘情况：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> /dev/sd*</span><br></pre></td></tr></table></figure></li>
+<li>找到你的硬盘。先进入diskmgmt.msc，然后查看你的硬盘对应哪个号（磁盘0还是磁盘1之类），如果是磁盘1，则对应的设备号码为<code>/dev/sdb</code>，请记住，后面要用到。</li>
+<li>在MSYS终端输入下面命令：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./ddrescue -n -f &lt;刚才的设备号码&gt; &lt;镜像文件的位置（**以msys形式填入**）&gt; ddrescue.log</span><br></pre></td></tr></table></figure></li>
+<li>保持电脑开机，直到完成操作</li>
+</ol>
+</li>
+<li><p>挂载</p>
+<ol>
+<li>打开OSFMount软件，点击Mount New</li>
+<li>出现对话框，打开刚才镜像文件：<br><img src="/2023/05/06/%E7%BB%99%E7%A1%AC%E7%9B%98%E5%88%9B%E5%BB%BAraw%E9%95%9C%E5%83%8F%EF%BC%8C%E5%B9%B6%E6%8C%82%E8%BD%BD%E5%B0%9D%E8%AF%95%E4%BF%AE%E5%A4%8D/osfmount1.png"></li>
+<li>如下设置：<br><img src="/2023/05/06/%E7%BB%99%E7%A1%AC%E7%9B%98%E5%88%9B%E5%BB%BAraw%E9%95%9C%E5%83%8F%EF%BC%8C%E5%B9%B6%E6%8C%82%E8%BD%BD%E5%B0%9D%E8%AF%95%E4%BF%AE%E5%A4%8D/osfmount2.png"><br><img src="/2023/05/06/%E7%BB%99%E7%A1%AC%E7%9B%98%E5%88%9B%E5%BB%BAraw%E9%95%9C%E5%83%8F%EF%BC%8C%E5%B9%B6%E6%8C%82%E8%BD%BD%E5%B0%9D%E8%AF%95%E4%BF%AE%E5%A4%8D/osfmount4.png"><br><img src="/2023/05/06/%E7%BB%99%E7%A1%AC%E7%9B%98%E5%88%9B%E5%BB%BAraw%E9%95%9C%E5%83%8F%EF%BC%8C%E5%B9%B6%E6%8C%82%E8%BD%BD%E5%B0%9D%E8%AF%95%E4%BF%AE%E5%A4%8D/osfmountfinish.png"></li>
+</ol>
+</li>
+</ol>
+<h2 id="完成了"><a href="#完成了" class="headerlink" title="完成了"></a>完成了</h2><p>接下来可以用任何方法修理这块虚拟硬盘。所有对镜像的更改都不会保存在源文件中，而是在delta文件中，所以如果改坏了，就删除delta和index文件，然后重新修理即可。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://yangshunhuai.github.io/2023/05/06/%E7%BB%99%E7%A1%AC%E7%9B%98%E5%88%9B%E5%BB%BAraw%E9%95%9C%E5%83%8F%EF%BC%8C%E5%B9%B6%E6%8C%82%E8%BD%BD%E5%B0%9D%E8%AF%95%E4%BF%AE%E5%A4%8D/" data-id="clhbtws6c000mds5ff5ekfn74" data-title="给硬盘创建raw镜像，并挂载尝试修复" class="article-share-link">Share</a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2023/03/10/Windows-%E7%A7%BB%E5%8A%A8%E7%A1%AC%E7%9B%98%E5%88%86%E5%8C%BA%E6%95%85%E9%9A%9C-%E6%8F%92%E4%B8%8A%E5%B0%B1%E6%AD%BB%E6%9C%BA%E7%9A%84%E4%B8%B4%E6%97%B6%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Windows 移动硬盘分区故障 插上就死机的临时解决方法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91/">嵌入式开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BC%80%E5%8F%91/">开发</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%97%A5%E5%B8%B8/">日常</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Windows/" rel="tag">Windows</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/stm32/" rel="tag">stm32</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/" rel="tag">存储技术</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%81%E6%B5%AA%E5%9C%B0%E7%90%832/" rel="tag">流浪地球2</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%B5%E5%BD%B1/" rel="tag">电影</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%A7%BB%E5%8A%A8%E7%A1%AC%E7%9B%98/" rel="tag">移动硬盘</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Windows/" style="font-size: 10px;">Windows</a> <a href="/tags/stm32/" style="font-size: 10px;">stm32</a> <a href="/tags/%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF/" style="font-size: 10px;">存储技术</a> <a href="/tags/%E6%B5%81%E6%B5%AA%E5%9C%B0%E7%90%832/" style="font-size: 10px;">流浪地球2</a> <a href="/tags/%E7%94%B5%E5%BD%B1/" style="font-size: 10px;">电影</a> <a href="/tags/%E7%A7%BB%E5%8A%A8%E7%A1%AC%E7%9B%98/" style="font-size: 10px;">移动硬盘</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/05/">May 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/03/">March 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2023/02/">February 2023</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/09/">September 2022</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2023/05/06/%E7%BB%99%E7%A1%AC%E7%9B%98%E5%88%9B%E5%BB%BAraw%E9%95%9C%E5%83%8F%EF%BC%8C%E5%B9%B6%E6%8C%82%E8%BD%BD%E5%B0%9D%E8%AF%95%E4%BF%AE%E5%A4%8D/">给硬盘创建raw镜像，并挂载尝试修复</a>
+          </li>
+        
+          <li>
+            <a href="/2023/03/10/Windows-%E7%A7%BB%E5%8A%A8%E7%A1%AC%E7%9B%98%E5%88%86%E5%8C%BA%E6%95%85%E9%9A%9C-%E6%8F%92%E4%B8%8A%E5%B0%B1%E6%AD%BB%E6%9C%BA%E7%9A%84%E4%B8%B4%E6%97%B6%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">Windows 移动硬盘分区故障 插上就死机的临时解决方法</a>
+          </li>
+        
+          <li>
+            <a href="/2023/02/08/%E6%B5%81%E6%B5%AA%E5%9C%B0%E7%90%832%E8%A7%82%E5%BD%B1%E5%B0%8F%E8%AE%B0/">流浪地球2观影小记</a>
+          </li>
+        
+          <li>
+            <a href="/2022/09/12/%E7%BB%88%E4%BA%8E%E6%91%B8%E6%B8%85%E4%BA%86%E7%99%BE%E5%BA%A6%E7%BD%91%E7%9B%98%E6%89%80%E8%B0%93%E4%BC%98%E5%8C%96%E9%80%9F%E7%8E%87%E7%9A%84%E9%97%A8%E9%81%93/">终于摸清了百度网盘所谓优化速率的门道</a>
+          </li>
+        
+          <li>
+            <a href="/2022/09/11/STM32CubeIDE%E6%B1%89%E5%8C%96%E5%90%8E%E4%B8%BB%E9%A1%B5%E5%87%BA%E7%8E%B0%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/">STM32CubeIDE汉化后主页出现报错解决方法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2023 yangshunhuai<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
